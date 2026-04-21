@@ -19,7 +19,7 @@ useEffect(() => {
   const fetchBalance = async () => {
     try {
       const token = localStorage.getItem("app_session_token");
-      const response = await axios.get("http://localhost:8000/api/user-auth/dashboard-data", {
+      const response = await axios.get("https://png-lottery-api.onrender.com/api/user-auth/dashboard-data", {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -54,7 +54,7 @@ useEffect(() => {
       const token = localStorage.getItem("app_session_token");
       
       // API သို့ လှမ်းပို့ခြင်း
-      await axios.post("http://localhost:8000/api/user-auth/withdraw", {
+      await axios.post("https://png-lottery-api.onrender.com/api/user-auth/withdraw", {
         amount: parseFloat(amount),
         bank: bank,
         account_name: accountName,
