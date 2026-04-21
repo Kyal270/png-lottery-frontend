@@ -13,7 +13,7 @@ const DashboardView = () => {
   const fetchNextDrawId = async () => {
     try {
       const adminToken = localStorage.getItem("admin_session_token");
-      const response = await axios.get("http://127.0.0.1:8000/api/dashboard/next-draw", {
+      const response = await axios.get("https://png-lottery-api.onrender.com/api/dashboard/next-draw", {
         headers: { Authorization: `Bearer ${adminToken}` }
       });
       setDrawId(response.data.next_draw_id); // State ထဲ အလိုအလျောက် ထည့်ပေးမည်
@@ -36,7 +36,7 @@ const DashboardView = () => {
     const fetchBets = async () => {
   try {
     const adminToken = localStorage.getItem("admin_session_token"); // Token ယူပါ
-    const response = await axios.get("http://127.0.0.1:8000/api/dashboard/bets", {
+    const response = await axios.get("https://png-lottery-api.onrender.com/api/dashboard/bets", {
       headers: { Authorization: `Bearer ${adminToken}` } // 🌟 Header ထည့်ပါ
     });
     setBets(response.data);
@@ -56,7 +56,7 @@ const DashboardView = () => {
 
     try {
       const adminToken = localStorage.getItem("admin_session_token"); 
-      const response = await axios.post("http://127.0.0.1:8000/api/dashboard/payout", {
+      const response = await axios.post("https://png-lottery-api.onrender.com/api/dashboard/payout", {
         draw_id: drawId,
         winning_number: winningNumber,
         auth_code: authCode // 🌟 Backend ဆီကို Code လှမ်းပို့ပါမည်
