@@ -17,7 +17,7 @@ const WinnersView = () => {
         const adminToken = localStorage.getItem("admin_session_token"); 
         
         // 🌟 URL တွင် admin လမ်းကြောင်းဖြစ်ကြောင်း သေချာစေရန် /api/admin/winners/all ဟု ပြောင်းထားပါသည် (Backend နှင့် ချိန်ပါ)
-        const response = await axios.get("http://127.0.0.1:8000/api/winners/all", {
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/winners/all", {
           headers: { Authorization: `Bearer ${adminToken}` } // 🌟 Token တွဲပို့ပါမည်
         });
         
