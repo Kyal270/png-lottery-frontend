@@ -36,7 +36,7 @@ const Deposit = () => {
       formData.append("ref_id", refId);
       formData.append("receipt", file); // 🌟 ပုံကို ထည့်လိုက်ပါပြီ
       
-      await axios.post("http://127.0.0.1:8000/api/user-auth/deposit", formData, {
+      await axios.post("https://png-lottery-api.onrender.com/api/user-auth/deposit", formData, {
         headers: { 
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data" // 🌟 File ပါကြောင်း ပြောပြခြင်း
