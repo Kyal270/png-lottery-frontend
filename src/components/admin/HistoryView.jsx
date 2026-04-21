@@ -19,7 +19,7 @@ const HistoryView = () => {
         const adminToken = localStorage.getItem("admin_session_token"); 
 
         // 🌟 URL လမ်းကြောင်းသေချာစစ်ပါ (Admin Route ဖြစ်ရန်) နှင့် Token တွဲပို့ပါ
-        const response = await axios.get("http://127.0.0.1:8000/api/history/all", {
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/history/all", {
           headers: { Authorization: `Bearer ${adminToken}` }
         });
         
