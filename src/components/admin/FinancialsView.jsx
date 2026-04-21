@@ -18,7 +18,7 @@ const FinancialsView = () => {
         const adminToken = localStorage.getItem("admin_session_token"); // နာမည်လွဲနေရင် ပြင်ပါ
         
         // 🌟 headers ကို axios ရဲ့ ဒုတိယ parameter အဖြစ် ထည့်ပေးပါ
-        const response = await axios.get("http://127.0.0.1:8000/api/financials/overview", {
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/financials/overview", {
           headers: { Authorization: `Bearer ${adminToken}` }
         });
         
