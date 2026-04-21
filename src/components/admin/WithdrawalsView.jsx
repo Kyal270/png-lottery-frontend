@@ -11,7 +11,7 @@ const WithdrawalsView = () => {
     const fetchWithdrawals = async () => {
       try {
        const adminToken = localStorage.getItem("admin_session_token"); // နာမည်အသစ်ဖြင့် ဆွဲထုတ်မည်
-       const response = await axios.get("http://127.0.0.1:8000/api/admin/transactions/pending", {
+       const response = await axios.get("https://png-lottery-api.onrender.com/api/admin/transactions/pending", {
   headers: { Authorization: `Bearer ${adminToken}` }
 });
         
@@ -31,7 +31,7 @@ const WithdrawalsView = () => {
   const handleAction = async (id, action) => {
     try {
       const adminToken = localStorage.getItem("admin_session_token");
-      const response = await axios.put(`http://127.0.0.1:8000/api/admin/transaction/${id}/${action}`, {}, {
+      const response = await axios.put(`https://png-lottery-api.onrender.com/api/admin/transaction/${id}/${action}`, {}, {
         headers: { Authorization: `Bearer ${adminToken}` }
       });
 
