@@ -31,7 +31,7 @@ const Register = () => {
   setIsLoading(true);
   
   try {
-    const response = await axios.post("http://localhost:8000/api/user-auth/register", formData);
+    const response = await axios.post("https://png-lottery-api.onrender.com/api/user-auth/register", formData);
     
     if (response.status === 200) {
       toast.success("Account created successfully! 🎉");
