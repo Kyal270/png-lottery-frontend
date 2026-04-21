@@ -15,7 +15,7 @@ const Login = () => {
   setIsLoading(true);
   
   try {
-    const response = await axios.post("http://localhost:8000/api/user-auth/login", {
+    const response = await axios.post("https://png-lottery-api.onrender.com/api/user-auth/login", {
   username,
   password
   });
