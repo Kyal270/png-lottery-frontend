@@ -21,7 +21,7 @@ const Bet = () => {
         const token = localStorage.getItem("app_session_token");
         if (!token) return;
 
-        const response = await axios.get("http://localhost:8000/api/user-auth/dashboard-data", {
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/user-auth/dashboard-data", {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -48,7 +48,7 @@ const Bet = () => {
     try {
       const token = localStorage.getItem("app_session_token"); 
       
-      const response = await axios.post("http://localhost:8000/api/user-auth/bet", {
+      const response = await axios.post("https://png-lottery-api.onrender.com/api/user-auth/bet", {
         number: number,
         amount: parseFloat(amount)
       }, {
