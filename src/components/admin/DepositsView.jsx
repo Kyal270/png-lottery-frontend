@@ -12,7 +12,7 @@ const DepositsView = () => {
     const fetchDeposits = async () => {
       try {
         const adminToken = localStorage.getItem("admin_session_token");
-        const response = await axios.get("http://127.0.0.1:8000/api/deposits/pending");
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/deposits/pending");
         headers: { Authorization: `Bearer ${adminToken}` }
         setPendingDeposits(response.data); // Data ကို State ထဲ ထည့်ပါမည်
       } catch (error) {
@@ -28,7 +28,7 @@ const DepositsView = () => {
   const handleAction = async (id, action) => {
     try {
       // Backend သို့ id နှင့် action (approve/reject) လှမ်းပို့ပါမည်
-      const response = await axios.post("http://127.0.0.1:8000/api/deposits/action", {
+      const response = await axios.post("https://png-lottery-api.onrender.com/api/deposits/action", {
         id: id,
         action: action
       });
