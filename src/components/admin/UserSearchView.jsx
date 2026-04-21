@@ -18,7 +18,7 @@ const UserSearchView = () => {
       const adminToken = localStorage.getItem("admin_session_token"); // နာမည်လွဲနေရင် ပြင်ပါ
         
       // 🌟 Backend သို့ User ID နှင့်တကွ Token လှမ်းပို့၍ Data တောင်းခံခြင်း
-      const response = await axios.get(`http://127.0.0.1:8000/api/users/${searchQuery}`, {
+      const response = await axios.get(`https://png-lottery-api.onrender.com/api/users/${searchQuery}`, {
         headers: { Authorization: `Bearer ${adminToken}` }
       });
       
