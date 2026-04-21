@@ -29,7 +29,7 @@ const Dashboard = () => {
           return;
         }
 
-        const response = await axios.get("http://127.0.0.1:8000/api/user-auth/dashboard-data", {
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/user-auth/dashboard-data", {
           headers: { Authorization: `Bearer ${token}` }
         });
 
