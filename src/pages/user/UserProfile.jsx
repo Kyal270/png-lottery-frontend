@@ -11,7 +11,7 @@ const UserProfile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("app_session_token");
-        const response = await axios.get("http://127.0.0.1:8000/api/user-auth/my-profile", {
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/user-auth/my-profile", {
           headers: { Authorization: `Bearer ${token}` }
         });
         setProfile(response.data);
