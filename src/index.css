@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------------------------------------
+   1. GLOBAL STYLES & BACKGROUND
+   ----------------------------------------------------------- */
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #020617; /* Slate 950 - အလွန်နက်သော အပြာရောင် */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(251, 191, 36, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.08) 0px, transparent 50%);
+  color: #f8fafc;
+  min-height: 100vh;
+}
+
+/* -----------------------------------------------------------
+   2. PREMIUM BADGES (Gold & Draw Styles)
+   ----------------------------------------------------------- */
+/* 🏆 Premium Winning Number Badge (ရွှေရောင် ဖောင်းကြွဂဏန်း) */
+.win-badge {
+    background: linear-gradient(to bottom, #fde047, #f59e0b);
+    color: #713f12;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-weight: 900;
+    font-size: 16px;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.6);
+    box-shadow: 0 2px 10px rgba(245, 158, 11, 0.4), inset 0 1px 2px rgba(255,255,255,0.9);
+    border: 1px solid #d97706;
+    display: inline-block;
+    letter-spacing: 2px;
+}
+
+.win-badge.large {
+    font-size: 32px;
+    padding: 8px 20px;
+}
+
+/* 🔵 Draw ID Badge (အပြာမှ ခရမ်းရောင်သို့) */
+.draw-badge {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
+    padding: 3px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(139, 92, 246, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    letter-spacing: 0.5px;
+}
+
+/* -----------------------------------------------------------
+   3. COMPONENTS LAYER (Tailwind Custom Classes)
+   ----------------------------------------------------------- */
+@layer components {
+  /* ✨ Glassmorphism Card */
+  .glass-card {
+    @apply bg-slate-900/65 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+
+  /* 🔍 Input & Select Boxes */
+  .glass-input {
+    @apply w-full bg-slate-950/50 border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-amber-400 transition-colors shadow-inner;
+  }
+
+  /* 📊 Table Layouts */
+  .glass-table-container {
+    @apply overflow-x-auto rounded-2xl border border-white/5 bg-slate-950/30;
+  }
+
+  .glass-th {
+    @apply p-4 sm:p-5 font-bold tracking-wide text-slate-300 bg-slate-950/60 text-left;
+  }
+
+  .glass-td {
+    @apply p-4 sm:p-5 border-t border-white/5;
+  }
+
+  .glass-tr {
+    @apply hover:bg-white/5 transition-colors;
+  }
+
+  /* 🔘 Buttons */
+  .glass-btn {
+    @apply px-4 py-2 rounded-xl text-xs font-bold transition-all hover:scale-105 active:scale-95;
+  }
+
+  .btn-approve {
+    @apply glass-btn bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 hover:bg-emerald-500 hover:text-white shadow-[0_0_15px_rgba(16,185,129,0.1)];
+  }
+
+  .btn-reject {
+    @apply glass-btn bg-red-500/10 text-red-500 border border-red-500/30 hover:bg-red-500 hover:text-white shadow-[0_0_15px_rgba(239,68,68,0.1)];
+  }
+}
+
+/* -----------------------------------------------------------
+   4. ANIMATIONS
+   ----------------------------------------------------------- */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
