@@ -11,7 +11,7 @@ import HistoryTab from "../../components/HistoryTab";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("home");
-  const storedUsername = localStorage.getItem("username") || "Loading...";
+  const storedUsername = sessionStorage.getItem("username") || "Loading...";
   const [wallet, setWallet] = useState({ username: storedUsername, balance: 0.00, currency: "PGK" });
   const [tickets, setTickets] = useState([]);
   const [transactions, setTransactions] = useState([]);
@@ -22,7 +22,7 @@ const Dashboard = () => {
     // 🌟 API မှ Data များ လှမ်းယူခြင်း 🌟
     const fetchDashboardData = async () => {
       try {
-        const token = localStorage.getItem("app_session_token"); 
+        const token = sessionStorage.getItem("app_session_token"); 
 
         if (!token) {
           navigate("/");
@@ -41,7 +41,7 @@ const Dashboard = () => {
         console.error("Dashboard Error:", error);
         if (error.response?.status === 401) {
           toast.error("Session expired. Please login again.");
-          localStorage.clear();
+          sessionStorage.clear();
           navigate("/");
         }
       } finally {
@@ -53,8 +53,8 @@ const Dashboard = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.clear();
-    toast.success("Logged out! Goodbye Master! 👋");
+    sessionStorage.clear();
+    toast.success("Logged out! Thank You ! 👋");
     navigate("/");
   };
 
