@@ -22,8 +22,8 @@ const Login = () => {
 
     if (response.data.access_token) {
       // Token ကို သိမ်းဆည်းပါ
-      localStorage.setItem("app_session_token", response.data.access_token);
-      localStorage.setItem("username", response.data.username);
+      sessionStorage.setItem("app_session_token", response.data.access_token);
+      sessionStorage.setItem("username", response.data.username);
       
       toast.success(`Welcome back, ${response.data.username}! 🎰`);
       navigate("/dashboard"); // User Dashboard ဆီ သွားပါ
