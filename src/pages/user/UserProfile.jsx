@@ -10,7 +10,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const token = localStorage.getItem("app_session_token");
+        const token = sessionStorage.getItem("app_session_token");
         const response = await axios.get("https://png-lottery-api.onrender.com/api/user-auth/my-profile", {
           headers: { Authorization: `Bearer ${token}` }
         });
