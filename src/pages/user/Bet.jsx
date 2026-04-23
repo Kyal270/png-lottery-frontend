@@ -18,7 +18,7 @@ const Bet = () => {
   useEffect(() => {
     const fetchBetData = async () => {
       try {
-        const token = localStorage.getItem("app_session_token");
+        const token = sessionStorage.getItem("app_session_token");
         if (!token) return;
 
         const response = await axios.get("https://png-lottery-api.onrender.com/api/user-auth/dashboard-data", {
@@ -46,7 +46,7 @@ const Bet = () => {
     
     setIsLoading(true);
     try {
-      const token = localStorage.getItem("app_session_token"); 
+      const token = sessionStorage.getItem("app_session_token"); 
       
       const response = await axios.post("https://png-lottery-api.onrender.com/api/user-auth/bet", {
         number: number,
@@ -117,12 +117,26 @@ const Bet = () => {
         <form onSubmit={handleBet} className="glass-card rounded-[2.5rem] p-8 border-amber-500/20 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
           
-          <div className="bg-amber-500/20 border border-amber-500/50 p-2 rounded-xl text-center mb-4">
-            <p className="text-[10px] text-amber-400 uppercase font-black tracking-widest">
-              Current Active Draw
-            </p>
-            <h2 className="text-xl text-white font-bold">#{activeDraw}</h2>
-          </div>
+          <div className="flex flex-col items-center justify-center gap-2 mb-4">
+  <p className="text-[14px] text-emerald-400 uppercase font-black tracking-widest text-center">
+    Current Active Draw
+  </p>
+
+  {/* 🌟 ညီကို့ရဲ့ မူရင်း Style အတိုင်းပါပဲ၊ Box နေရာမှာ draw-badge class လေးပဲ ထည့်လိုက်တာပါ */}
+  <div className="relative group">
+    {/* စာလုံးနောက်က Glow */}
+    <div className="absolute inset-0 bg-amber-500/20 blur-xl rounded-full scale-150 opacity-50"></div>
+    
+    {/* 🌟 ပင်မ Box (draw-badge class ကို ဒီမှာပဲ ထည့်ပေးထားပါတယ်) */}
+    <div className="draw-badge relative bg-slate-900/50 border border-white/10 px-8 py-3 rounded-2xl backdrop-blur-md">
+      <h2 className="text-xl md:text-2xl font-black tracking-[0.05em] flex items-center gap-3">
+        <span className="bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+          {activeDraw}
+        </span>
+      </h2>
+    </div>
+  </div>
+</div>
 
           {/* ဂဏန်းရိုက်ရန် */}
           <div className="mb-8">
