@@ -19,9 +19,9 @@ const AdminPanel = () => {
   useEffect(() => {
     const checkAuth = () => {
       // ညီကို သိမ်းထားတဲ့ admin token နာမည်ကို ဒီမှာ သုံးပါ (app_session_token သို့မဟုတ် admin_session_token)
-      const token = localStorage.getItem("app_session_token"); 
+      const adminToken = sessionStorage.getItem("admin_session_token"); 
       
-      if (!token) {
+      if (!adminToken) {
         toast.error("Session expired! Please login again.");
         navigate("/admin/login"); // Token မရှိရင် Admin Login သို့ ပြန်ကန်ထုတ်မည်
       }
@@ -33,8 +33,8 @@ const AdminPanel = () => {
   // 🌟 Logout လုပ်မည့် Function ကို ပြင်ဆင်ထားသည် 🌟
   const handleLogout = () => {
      // Token တွေဖျက်ပြီး ပြန်ထွက်မယ်
-     localStorage.removeItem("app_session_token"); // Token အမှန်တကယ် ဖျက်ရမည့် နေရာ
-     localStorage.removeItem("user_role");
+     sessionStorage.removeItem("admin_session_token"); // Token အမှန်တကယ် ဖျက်ရမည့် နေရာ
+     sessionStorage.removeItem("user_role");
      toast.success("Logged out successfully");
      navigate("/admin/login");
   }
