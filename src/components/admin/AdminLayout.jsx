@@ -14,8 +14,8 @@ const AdminLayout = ({ children, activeTab, setActiveTab }) => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("admin_session_token");
-    localStorage.removeItem("user_role");
+    sessionStorage.removeItem("admin_session_token");
+    sessionStorage.removeItem("user_role");
     
     toast.success("System Logged Out. Goodbye Master!");
     window.location.href =("/admin/login");
