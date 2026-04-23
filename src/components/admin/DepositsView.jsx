@@ -11,7 +11,7 @@ const DepositsView = () => {
   useEffect(() => {
     const fetchDeposits = async () => {
       try {
-        const adminToken = localStorage.getItem("admin_session_token");
+        const adminToken = sessionStorage.getItem("admin_session_token");
         const response = await axios.get("https://png-lottery-api.onrender.com/api/deposits/pending");
         headers: { Authorization: `Bearer ${adminToken}` }
         setPendingDeposits(response.data); // Data ကို State ထဲ ထည့်ပါမည်
