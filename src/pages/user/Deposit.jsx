@@ -1,5 +1,5 @@
 // src/pages/user/Deposit.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios"; // 🌟 axios ထည့်ထားပါသည်
@@ -11,14 +11,8 @@ const Deposit = () => {
   const [fileName, setFileName] = useState("No file chosen");
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState(null);
-
-  const adminBanks = [
-    { id: 1, name: "BSP Bank", accountName: "Lottery Master Admin", accountNo: "123-456-7890" },
-    { id: 2, name: "Kina Bank", accountName: "Lottery Master Co.", accountNo: "987-654-3210" },
-    { id: 3, name: "Cellmoni", accountName: "Jimmy Official", accountNo: "777-888-9999" }
-  ];
-
-  const [selectedBank, setSelectedBank] = useState(adminBanks[0]);
+  const [adminBanks, setAdminBanks] = useState([]); // 🌟 Array အလွတ်ပြောင်းပါ
+  const [selectedBank, setSelectedBank] = useState(null); // null အရင်ထားပါ
   const quickAmounts = [50, 100, 500, 1000];
 
   // 🌟 Backend သို့ Deposit Request ပို့မည့် Function 🌟
@@ -27,7 +21,7 @@ const Deposit = () => {
     setIsLoading(true);
     
     try {
-      const token = localStorage.getItem("app_session_token"); 
+      const token = sessionStorage.getItem("app_session_token"); 
       
       // FormData တည်ဆောက်ခြင်း
       const formData = new FormData();
@@ -56,6 +50,21 @@ const Deposit = () => {
     navigator.clipboard.writeText(selectedBank.accountNo);
     toast.success(`${selectedBank.name} Account Copied!`);
   };
+
+  useEffect(() => {
+    const fetchBanks = async () => {
+      try {
+        const res = await axios.get("http://127.0.0.1:8000/api/dashboard/banks");
+        setAdminBanks(res.data);
+        if (res.data.length > 0) {
+          setSelectedBank(res.data[0]); // ပထမဆုံး Bank ကို Auto ရွေးထားပေးမည်
+        }
+      } catch (error) {
+        toast.error("Failed to load bank details!");
+      }
+    };
+    fetchBanks();
+  }, []);
 
   if (isLoading) {
     return (
@@ -94,12 +103,14 @@ const Deposit = () => {
             
             <div className="relative">
               <select 
-                value={selectedBank.id}
-                onChange={(e) => setSelectedBank(adminBanks.find(b => b.id === parseInt(e.target.value)))}
+                value={selectedBank?.id || ""}
+                onChange={(e) => setSelectedBank(adminBanks?.find(b => b.id === parseInt(e.target.value)))}
                 className="bg-slate-950/20 border border-slate-950/20 text-slate-900 text-[10px] font-black px-3 py-2 rounded-xl focus:outline-none cursor-pointer appearance-none pr-8 uppercase tracking-widest"
               >
-                {adminBanks.map(bank => (
-                  <option key={bank.id} value={bank.id} className="bg-slate-900 text-white font-bold">{bank.name}</option>
+                {Array.isArray(adminBanks) && adminBanks.map(bank => (
+                  <option key={bank.id} value={bank.id} className="bg-slate-900 text-white font-bold">
+                    {bank.name}
+                  </option>
                 ))}
               </select>
               <i className="fa-solid fa-chevron-down absolute right-2.5 top-1/2 transform -translate-y-1/2 pointer-events-none text-slate-900 text-[8px]"></i>
@@ -108,8 +119,12 @@ const Deposit = () => {
 
           <div className="flex justify-between items-end relative z-10">
             <div>
-              <p className="font-black text-3xl tracking-[0.1em] mb-1 drop-shadow-sm">{selectedBank.accountNo}</p>
-              <p className="text-[11px] font-black uppercase tracking-widest opacity-80">{selectedBank.accountName}</p>
+              <p className="font-black text-3xl tracking-[0.1em] mb-1 drop-shadow-sm">
+                {selectedBank?.account_no || "Loading..."}
+              </p>
+              <p className="text-[11px] font-black uppercase tracking-widest opacity-80">
+                {selectedBank?.account_name || "Please wait..."}
+              </p>
             </div>
             
             <button 
@@ -162,7 +177,7 @@ const Deposit = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" disabled={isLoading || !amount || !refId} className="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-black text-sm uppercase tracking-[0.2em] py-5 rounded-2xl shadow-xl shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 flex justify-center items-center gap-3">
+          <button type="submit" disabled={isLoading || !amount || !refId || !selectedBank} className="w-full bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 font-black text-sm uppercase tracking-[0.2em] py-5 rounded-2xl shadow-xl shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 flex justify-center items-center gap-3">
             {isLoading ? (
               <><i className="fa-solid fa-circle-notch fa-spin"></i> Processing...</>
             ) : (
