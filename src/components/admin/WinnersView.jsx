@@ -14,7 +14,7 @@ const WinnersView = () => {
     const fetchWinners = async () => {
       try {
         // 🌟 Admin Token ကို ယူပါမည် (နာမည်လွဲနေလျှင် ပြင်ပါ)
-        const adminToken = localStorage.getItem("admin_session_token"); 
+        const adminToken = sessionStorage.getItem("admin_session_token"); 
         
         // 🌟 URL တွင် admin လမ်းကြောင်းဖြစ်ကြောင်း သေချာစေရန် /api/admin/winners/all ဟု ပြောင်းထားပါသည် (Backend နှင့် ချိန်ပါ)
         const response = await axios.get("https://png-lottery-api.onrender.com/api/winners/all", {
@@ -92,10 +92,20 @@ const WinnersView = () => {
               filteredWinners.map(w => (
                 /* 🌟 glass-tr class ကို သုံးလိုက်ပါပြီ */
                 <tr key={w.id} className="glass-tr">
-                  <td className="glass-td">
-                    {/* 🌟 index.css မှ .draw-badge class ကို သုံးထားသည် */}
-                    <span className="draw-badge">{w.drawId}</span>
-                  </td>
+                  <td className="glass-td py-3">
+  {/* 🌟 Glass-Neon Style Badge for Table ID */}
+  <div className="relative inline-flex group">
+    {/* Glow Effect - Table row တွေမှာ မျက်စိမရှုပ်အောင် ခပ်ပါးပါးလေးပဲ ထည့်ထားပါတယ် */}
+    <div className="absolute inset-0 bg-amber-500/10 blur-md rounded-full opacity-30"></div>
+    
+    {/* ပင်မ Badge Box */}
+    <div className="draw-badge relative bg-slate-900/70 border border-white/10 px-2.5 py-0.5 rounded-lg backdrop-blur-sm">
+      <span className="text-[15px] font-black tracking-widest bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]">
+        {w.drawId}
+      </span>
+    </div>
+  </div>
+</td>
                   <td className="glass-td">
                     <div className="flex items-center gap-2">
                       <div className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-[10px]">👤</div>
