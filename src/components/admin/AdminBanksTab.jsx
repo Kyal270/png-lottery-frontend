@@ -8,7 +8,7 @@ const AdminBanksTab = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // VITE_API_URL မရှိရင် Local ကို Auto သုံးမည်
-  const API_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+  const API_BASE = import.meta.env.VITE_API_URL || "https://png-lottery-api.onrender.com";
 
   const fetchBanks = async () => {
     try {
