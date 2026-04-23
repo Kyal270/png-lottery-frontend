@@ -15,7 +15,7 @@ const UserSearchView = () => {
     setIsLoading(true);
     try {
       // 🌟 Admin Token ကို ယူပါမည်
-      const adminToken = localStorage.getItem("admin_session_token"); // နာမည်လွဲနေရင် ပြင်ပါ
+      const adminToken = sessionStorage.getItem("admin_session_token"); // နာမည်လွဲနေရင် ပြင်ပါ
         
       // 🌟 Backend သို့ User ID နှင့်တကွ Token လှမ်းပို့၍ Data တောင်းခံခြင်း
       const response = await axios.get(`https://png-lottery-api.onrender.com/api/users/${searchQuery}`, {
