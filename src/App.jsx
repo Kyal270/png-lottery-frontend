@@ -5,39 +5,34 @@ import { Toaster } from "react-hot-toast";
 import TitleUpdater from "./components/TitleUpdater";
 import axios from "axios";
 
-// 🌟 User Pages များကို Import လုပ်ပါ
-import UserLogin from "./pages/user/Login"; // 👈 ညီကို့ရဲ့ လမ်းကြောင်းအတိုင်း ပြင်ပေးထားပါတယ်
+// Pages & Components Import
+import UserLogin from "./pages/user/Login";
 import Register from "./pages/user/Register";
 import Dashboard from "./pages/user/Dashboard";
 import UserProfile from "./pages/user/UserProfile";
 import Bet from "./pages/user/Bet";
 import Deposit from "./pages/user/Deposit";
-import Withdraw from ".//pages/user/Withdraw";// 🌟 Import လုပ်ဖို့ မမေ့ပါနဲ့
-
-// Admin Pages
+import Withdraw from "./pages/user/Withdraw";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminPanel from "./pages/admin/AdminPanel";
-import ProtectedRoute from "./components/admin/ProtectedRoute";
+import ProtectedRoute from "./components/admin/ProtectedRoute"; // Admin အတွက်
+import UserProtectedRoute from "./components/user/UserProtectedRoute"; // User အတွက် 🌟
 
+// Axios Interceptor: Token သက်တမ်းကုန်လျှင် ကိုယ်စီ Login ဆီ ပြန်ပို့ရန်
 axios.interceptors.response.use(
-  (response) => {
-    // Error မရှိရင် ပုံမှန်အတိုင်း Data ကို ဆက်ပို့ပေးမည်
-    return response;
-  },
+  (response) => response,
   (error) => {
-    // အကယ်၍ Backend မှ 401 (Unauthorized - Token ကုန်သွားခြင်း) ပြန်လာပါက
     if (error.response && error.response.status === 401) {
+      sessionStorage.clear(); // အကုန်ဖျက်မယ် 🌟
       
-      // ၁။ Storage ထဲရှိ သက်တမ်းကုန်နေသော Token များကို ဖျက်ပစ်မည်
-      localStorage.removeItem("app_session_token");
-      localStorage.removeItem("admin_session_token");
-      localStorage.removeItem("user_role");
+      const isAdminPath = window.location.pathname.startsWith('/admin');
       
-      // ၂။ Admin Login စာမျက်နှာသို့ အတင်း ပြန်ကန်ထုတ်မည် 
-      // (မှတ်ချက်: ညီကို့ရဲ့ login လမ်းကြောင်းက /admin-login ဖြစ်နေရင် အဲဒီအတိုင်း ပြောင်းရေးပေးပါ)
-      window.location.href = "/admin/login"; 
+      if (isAdminPath) {
+        window.location.href = "/admin-login"; // Admin ကို Admin Login သို့ 🌟
+      } else {
+        window.location.href = "/"; // User ကို User Login သို့ 🌟
+      }
     }
-    
     return Promise.reject(error);
   }
 );
@@ -45,23 +40,23 @@ axios.interceptors.response.use(
 function App() {
   return (
     <Router>
-      {/* TitleUpdater နှင့် Toaster ကို တစ်ခါတည်း ထည့်ထားပါသည် */}
       <TitleUpdater />
       <Toaster position="top-center" reverseOrder={false} />
       
       <Routes>
-        {/* 👤 User Routes */}
+        {/* 👤 Public Routes (Login မလိုပါ) */}
         <Route path="/" element={<UserLogin />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/bet" element={<Bet />} />
-        <Route path="/deposit" element={<Deposit />} />
-        <Route path="/withdraw" element={<Withdraw />} />
-
-        {/* 🛡️ Admin Routes */}
         <Route path="/admin-login" element={<AdminLogin />} />
-        
+
+        {/* 👤 User Protected Routes (Login လိုအပ်သည်) 🌟 */}
+        <Route path="/dashboard" element={<UserProtectedRoute><Dashboard /></UserProtectedRoute>} />
+        <Route path="/profile" element={<UserProtectedRoute><UserProfile /></UserProtectedRoute>} />
+        <Route path="/bet" element={<UserProtectedRoute><Bet /></UserProtectedRoute>} />
+        <Route path="/deposit" element={<UserProtectedRoute><Deposit /></UserProtectedRoute>} />
+        <Route path="/withdraw" element={<UserProtectedRoute><Withdraw /></UserProtectedRoute>} />
+
+        {/* 🛡️ Admin Protected Routes (Admin Role လိုအပ်သည်) 🌟 */}
         <Route 
           path="/admin/*" 
           element={
@@ -71,7 +66,7 @@ function App() {
           } 
         />
 
-        {/* မှားယွင်းသော လမ်းကြောင်းများအားလုံးကို Login သို့ ပြန်ပို့ပါမည် */}
+        {/* မသိသော လမ်းကြောင်းမှန်သမျှ User Login သို့ ပို့မည် */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
