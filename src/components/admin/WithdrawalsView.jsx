@@ -10,7 +10,7 @@ const WithdrawalsView = () => {
   useEffect(() => {
     const fetchWithdrawals = async () => {
       try {
-       const adminToken = localStorage.getItem("admin_session_token"); // နာမည်အသစ်ဖြင့် ဆွဲထုတ်မည်
+       const adminToken = sessionStorage.getItem("admin_session_token"); // နာမည်အသစ်ဖြင့် ဆွဲထုတ်မည်
        const response = await axios.get("https://png-lottery-api.onrender.com/api/admin/transactions/pending", {
   headers: { Authorization: `Bearer ${adminToken}` }
 });
@@ -30,7 +30,7 @@ const WithdrawalsView = () => {
   // 🌟 ၂။ PUT Method နှင့် Admin Action URL အမှန်ကို သုံးထားသည်
   const handleAction = async (id, action) => {
     try {
-      const adminToken = localStorage.getItem("admin_session_token");
+      const adminToken = sessionStorage.getItem("admin_session_token");
       const response = await axios.put(`https://png-lottery-api.onrender.com/api/admin/transaction/${id}/${action}`, {}, {
         headers: { Authorization: `Bearer ${adminToken}` }
       });
