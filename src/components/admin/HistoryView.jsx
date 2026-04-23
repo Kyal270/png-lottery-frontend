@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // 🌟 useEffect ကို ထပ်ထည့်ပါ
+import React, { useState, useEffect } from "react";
 import axios from "axios"; // 🌟 API ခေါ်ရန်
 import toast from "react-hot-toast";
 import { getStatusBadge } from "../../utils/helpers"; 
@@ -16,7 +16,7 @@ const HistoryView = () => {
     const fetchHistory = async () => {
       try {
         // 🌟 Admin Token ကို ယူပါမည်
-        const adminToken = localStorage.getItem("admin_session_timport React, { useState, useEffect } from "react"; // 🌟 useEffect ကို ထပ်ထည့်ပါ
+        const adminToken = localStorage.getItem("admin_session_token"); // 🌟 useEffect ကို ထပ်ထည့်ပါ
 import axios from "axios"; // 🌟 API ခေါ်ရန်
 import toast from "react-hot-toast";
 import { getStatusBadge } from "../../utils/helpers"; 
