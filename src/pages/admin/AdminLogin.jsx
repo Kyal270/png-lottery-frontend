@@ -27,8 +27,8 @@ const AdminLogin = () => {
         return; 
       }
 
-      localStorage.setItem("admin_session_token", response.data.access_token);
-      localStorage.setItem("user_role", response.data.role);
+      sessionStorage.setItem("admin_session_token", response.data.access_token);
+      sessionStorage.setItem("user_role", response.data.role);
 
       toast.success(response.data.message || "Welcome Master!"); 
       
