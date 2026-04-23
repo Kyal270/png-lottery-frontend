@@ -4,8 +4,8 @@ import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
   // Browser ရဲ့ မှတ်ဉာဏ်ထဲကနေ Token နဲ့ Role ကို လှမ်းစစ်ပါမယ်
-  const adminToken = localStorage.getItem("admin_session_token");
-  const role = localStorage.getItem('user_role');
+  const adminToken = sessionStorage.getItem("admin_session_token");
+  const role = sessionStorage.getItem('user_role');
 
   // တကယ်လို့ Token မရှိဘူး (သို့) Role က 'admin' မဟုတ်ဘူးဆိုရင်...
   if (!adminToken || role !== 'admin') {
