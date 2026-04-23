@@ -23,10 +23,25 @@ const TicketsTab = ({ tickets }) => {
                   <div className="bg-amber-400/5 border border-amber-500/30 rounded-2xl px-4 py-2 shadow-inner">
                     <span className="font-black text-2xl text-amber-400 tracking-widest">{ticket.number}</span>
                   </div>
-                  <div>
-                    <p className="text-[10px] text-slate-300 font-black uppercase tracking-wider">#{ticket.draw || ticket.draw_number}</p>
-                    <p className="text-[9px] text-slate-500 font-bold">{ticket.date}</p>
-                  </div>
+                  <div className="flex flex-col items-start gap-2">
+  {/* 🌟 Glass-Neon Style Badge (Compact Version) */}
+  <div className="relative group">
+    {/* Glow Effect - နေရာသေးတာမို့ blur ကို နည်းနည်းလျှော့ထားပါတယ် */}
+    <div className="absolute inset-0 bg-amber-500/20 blur-lg rounded-full opacity-40"></div>
+    
+    {/* ပင်မ Badge Box */}
+    <div className="draw-badge relative bg-slate-900/60 border border-white/10 px-3 py-1 rounded-xl backdrop-blur-md">
+      <span className="text-[15px] font-black tracking-widest bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]">
+        {ticket.draw || ticket.draw_number}
+      </span>
+    </div>
+  </div>
+
+  {/* Date - Badge နဲ့ လိုက်ဖက်အောင် style နည်းနည်း ပြင်ထားပါတယ် */}
+  <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider pl-1">
+    {ticket.date}
+  </p>
+</div>
                 </div>
                 <div className={`px-3 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest border ${
                     currentStatus === 'won' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
