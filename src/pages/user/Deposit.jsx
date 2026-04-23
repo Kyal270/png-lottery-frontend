@@ -54,7 +54,7 @@ const Deposit = () => {
   useEffect(() => {
     const fetchBanks = async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/dashboard/banks");
+        const res = await axios.get("https://png-lottery-api.onrender.com/api/dashboard/banks");
         setAdminBanks(res.data);
         if (res.data.length > 0) {
           setSelectedBank(res.data[0]); // ပထမဆုံး Bank ကို Auto ရွေးထားပေးမည်
