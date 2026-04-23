@@ -12,7 +12,7 @@ const DashboardView = () => {
   const [search, setSearch] = useState({ user: "", num: "", draw: "" });
   const fetchNextDrawId = async () => {
     try {
-      const adminToken = localStorage.getItem("admin_session_token");
+      const adminToken = sessionStorage.getItem("admin_session_token");
       const response = await axios.get("https://png-lottery-api.onrender.com/api/dashboard/next-draw", {
         headers: { Authorization: `Bearer ${adminToken}` }
       });
@@ -35,7 +35,7 @@ const DashboardView = () => {
   useEffect(() => {
     const fetchBets = async () => {
   try {
-    const adminToken = localStorage.getItem("admin_session_token"); // Token ယူပါ
+    const adminToken = sessionStorage.getItem("admin_session_token"); // Token ယူပါ
     const response = await axios.get("https://png-lottery-api.onrender.com/api/dashboard/bets", {
       headers: { Authorization: `Bearer ${adminToken}` } // 🌟 Header ထည့်ပါ
     });
@@ -55,7 +55,7 @@ const DashboardView = () => {
     }
 
     try {
-      const adminToken = localStorage.getItem("admin_session_token"); 
+      const adminToken = sessionStorage.getItem("admin_session_token"); 
       const response = await axios.post("https://png-lottery-api.onrender.com/api/dashboard/payout", {
         draw_id: drawId,
         winning_number: winningNumber,
@@ -180,7 +180,20 @@ const DashboardView = () => {
                                 filteredBets.map(bet => (
                                 <tr key={bet.id} className="glass-tr">
                                     <td className="glass-td font-medium text-slate-200">{bet.userId}</td>
-                                    <td className="glass-td font-medium text-slate-200"><span className="draw-badge text-[10px] px-2 py-1">{bet.draw}</span></td>
+                                    <td className="glass-td font-medium text-slate-200 py-3">
+  {/* 🌟 Table ထဲမှာ အချိုးကျအောင် inline-block နဲ့ ထိန်းထားပါတယ် */}
+  <div className="relative inline-flex group">
+    {/* Glow Effect - Table row တွေကြားမှာ ရှုပ်မသွားအောင် အလင်းကို နည်းနည်းလျှော့ထားပါတယ် */}
+    <div className="absolute inset-0 bg-amber-500/10 blur-md rounded-full opacity-30"></div>
+    
+    {/* Badge Box - padding ကို px-2.5 py-0.5 လောက်ပဲသုံးပြီး ကျစ်ကျစ်လျစ်လျစ် လုပ်ထားပါတယ် */}
+    <div className="draw-badge relative bg-slate-900/70 border border-white/10 px-2.5 py-1 rounded-lg backdrop-blur-sm">
+      <span className="text-[13px] font-black tracking-widest bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]">
+        {bet.draw}
+      </span>
+    </div>
+  </div>
+</td>
                                     <td className="glass-td text-amber-400 font-black text-lg">{bet.number}</td>
                                     <td className="glass-td text-emerald-400 font-bold">{bet.amount.toLocaleString()}</td>
                                     <td className="glass-td text-slate-400 text-xs font-mono">{bet.time}</td>
