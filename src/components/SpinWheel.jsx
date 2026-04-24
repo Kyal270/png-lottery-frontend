@@ -17,7 +17,7 @@ const SpinWheel = ({ onSpinComplete }) => {
     try {
       // 🌟 ၁။ Backend API ဆီကနေ ဘယ်ဂဏန်းပေါက်လဲ လှမ်းတောင်းမည်
       // (ညီကို့ရဲ့ Render API Link နဲ့ Token ကို သေချာ ထည့်ပေးပါ)
-      const response = await axios.post("http://127.0.0.1:8000/api/spin/play", {}, {
+      const response = await axios.post("https://png-lottery-api.onrender.com/api/spin/play", {}, {
           // headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
 
