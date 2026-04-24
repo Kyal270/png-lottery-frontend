@@ -16,9 +16,9 @@ const Login = () => {
   
   try {
     const response = await axios.post("https://png-lottery-api.onrender.com/api/user-auth/login", {
-  username,
-  password
-  });
+      username,
+      password
+    });
 
     if (response.data.access_token) {
       // Token ကို သိမ်းဆည်းပါ
@@ -26,7 +26,13 @@ const Login = () => {
       sessionStorage.setItem("username", response.data.username);
       
       toast.success(`Welcome back, ${response.data.username}! 🎰`);
-      navigate("/dashboard"); // User Dashboard ဆီ သွားပါ
+      
+      // 🌟 Backend က ပို့လိုက်တဲ့ needs_spin ကို စစ်ဆေးခြင်း
+      if (response.data.needs_spin) {
+        navigate("/welcome-spin"); // မလှည့်ရသေးရင် Spin စာမျက်နှာသို့ သွားမည်
+      } else {
+        navigate("/dashboard"); // လှည့်ပြီးသားဆိုရင် Dashboard သို့ တန်းသွားမည်
+      }
     }
   } catch (error) {
     toast.error("Invalid username or password!");
