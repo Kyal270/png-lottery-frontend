@@ -83,7 +83,7 @@ const UserProfile = () => {
               <i className="fa-solid fa-circle-check mr-1"></i> {profile.status}
             </span>
             <span className="text-slate-400 text-[10px] font-bold uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-xl border border-white/10">
-              ID: #{profile.db_id}
+              Referral_ID: {profile.db_id}
             </span>
           </div>
 
