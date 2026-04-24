@@ -12,8 +12,9 @@ const DepositsView = () => {
     const fetchDeposits = async () => {
       try {
         const adminToken = sessionStorage.getItem("admin_session_token");
-        const response = await axios.get("https://png-lottery-api.onrender.com/api/deposits/pending");
-        headers: { Authorization: `Bearer ${adminToken}` }
+        const response = await axios.get("https://png-lottery-api.onrender.com/api/deposits/pending", {
+          headers: { Authorization: `Bearer ${adminToken}` }
+        });
         setPendingDeposits(response.data); // Data ကို State ထဲ ထည့်ပါမည်
       } catch (error) {
         toast.error("Failed to fetch pending deposits!");
@@ -94,7 +95,14 @@ const DepositsView = () => {
                     <p className="text-xs text-slate-400 mt-2 font-mono tracking-widest">Ref: {req.refId}</p>
                   </td>
                   <td className="glass-td">
-                    <button onClick={() => setSelectedReceipt(req.receiptUrl)} className="flex items-center gap-1.5 bg-slate-950/50 hover:bg-white/10 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold transition-colors border border-white/10 shadow-sm">
+                    <button 
+                      onClick={() => {
+                        // Backend လင့်ခ်ကို အရှေ့ကနေ ပေါင်းထည့်ပါမည်
+                        const imageUrl = `https://png-lottery-api.onrender.com/${req.receiptUrl.replace(/\\/g, '/')}`;
+                        setSelectedReceipt(imageUrl);
+                      }} 
+                      className="flex items-center gap-1.5 bg-slate-950/50 hover:bg-white/10 text-slate-200 px-4 py-2 rounded-xl text-xs font-bold transition-colors border border-white/10 shadow-sm"
+                    >
                       <i className="fa-solid fa-image text-sky-400"></i> View
                     </button>
                   </td>
@@ -117,7 +125,7 @@ const DepositsView = () => {
             <button onClick={() => setSelectedReceipt(null)} className="absolute -top-4 -right-4 bg-red-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold shadow-[0_0_15px_rgba(239,68,68,0.5)] hover:scale-110 transition-transform">
               <i className="fa-solid fa-times text-lg"></i>
             </button>
-            <img src={selectedReceipt} alt="Transfer Receipt" className="w-full h-auto rounded-[1.5rem] object-contain max-h-[80vh]" />
+            <img src={selectedReceipt} alt="Transfer Receipt" className="w-full h-auto rounded-[1.5rem] object-contain max-h-[63vh]" />
           </div>
         </div>
       )}
