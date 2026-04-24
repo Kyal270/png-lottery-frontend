@@ -7,6 +7,7 @@ import axios from "axios";
 
 // Pages & Components Import
 import UserLogin from "./pages/user/Login";
+import WelcomeSpin from "./pages/user/WelcomeSpin";
 import Register from "./pages/user/Register";
 import Dashboard from "./pages/user/Dashboard";
 import UserProfile from "./pages/user/UserProfile";
@@ -55,6 +56,7 @@ function App() {
         <Route path="/bet" element={<UserProtectedRoute><Bet /></UserProtectedRoute>} />
         <Route path="/deposit" element={<UserProtectedRoute><Deposit /></UserProtectedRoute>} />
         <Route path="/withdraw" element={<UserProtectedRoute><Withdraw /></UserProtectedRoute>} />
+        <Route path="/welcome-spin" element={<UserProtectedRoute><WelcomeSpin /></UserProtectedRoute>} />
 
         {/* 🛡️ Admin Protected Routes (Admin Role လိုအပ်သည်) 🌟 */}
         <Route 
