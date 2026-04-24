@@ -54,7 +54,7 @@ useEffect(() => {
       const token = sessionStorage.getItem("app_session_token");
       
       // API သို့ လှမ်းပို့ခြင်း
-      await axios.post("http://127.0.0.1:8000/api/user-auth/withdraw", {
+      await axios.post("https://png-lottery-api.onrender.com/api/user-auth/withdraw", {
         amount: parseFloat(amount),
         bank: bank,
         account_name: accountName,
