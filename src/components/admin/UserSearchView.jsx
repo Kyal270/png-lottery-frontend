@@ -98,7 +98,7 @@ const UserSearchView = () => {
                   <i className="fa-solid fa-circle-check mr-1"></i> {searchedUser.status}
                 </span>
                 <span className="text-slate-500 text-[10px] font-bold uppercase tracking-widest bg-slate-950/50 px-3 py-1 rounded-lg border border-white/5">
-                  ID: #{searchedUser.db_id}
+                  ID: {searchedUser.db_id}
                 </span>
               </div>
               <p className="text-slate-500 text-[11px] mt-4 font-mono uppercase tracking-widest">Joined Since: {searchedUser.joinDate}</p>
